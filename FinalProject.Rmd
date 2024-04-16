@@ -9,14 +9,29 @@ format:
 ---
 
 ```{r}
-# Initialize an empty data frame to store the filtered data
-filtered_data <- data.frame(ID = sample_data$ID)
+library(tidyverse)
+```
 
-# Loop through the columns of the sample data frame, starting from the third column
-for (i in seq(3, ncol(sample_data), by = 2)) {
-  filtered_data <- cbind(filtered_data, sample_data[, i])
-}
+```{r}
 
-# View the resulting data
-print(filtered_data)
+x <- "https://raw.githubusercontent.com/ryanfernald/MATH167R-Final-Project/main/DATA/smartphone_usage_time_and_health_variable_outcomes.csv"
+
+data <- read.csv(x)
+
+head(data)
+```
+
+```{r}
+filtered_data <- data[, c(1:2, seq(4, ncol(data), by = 2))]
+
+head(filtered_data)
+```
+
+```{r}
+ggplot(data = filtered_data, aes(x = Usage,
+                                 y = Stress_perception)) +
+  geom_line() +
+  labs(title = "Anxiety vs. Screen Time",
+       x = "Screen Time (hours/day)",
+       y = "Anxiety (0-21)")
 ```
