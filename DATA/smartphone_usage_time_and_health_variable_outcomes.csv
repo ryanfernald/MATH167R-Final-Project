@@ -1,5 +1,5 @@
 "Usage","Stress_perception","Stress_percentage_interval","Sleep_dissatisfaction","Sleep_dissatisfaction_interval","Depressive_symptoms","Depressive_symptoms_interval","Suicidal_idea","Suicidal_idea_interval","Suicidal_plan","Suicidal_plan_interval","Suicidal_attempt","Suicidal_attempt_interval","Alcohol","Alcohol_interval","Smoking","Smoking_interval","Smartphone_overdependence","Smartphone_overdependence_interval","Obesity","Obesity_interval"
-"0 h",1,NA,1,NA,1,NA,1,NA,1,NA,1,NA,1,NA,1,NA,1,NA,1,NA
+"0-0 h",1,NA,1,NA,1,NA,1,NA,1,NA,1,NA,1,NA,1,NA,1,NA,1,NA
 "0-2 h",0.7,"(0.62-0.79)",0.73,"0.62-0.79",0.62,"0.55-0.71",0.57,"0.48-0.68",0.44,"0.34-0.56",0.27,"0.20-0.37",0.53,"0.47-0.60",0.3,"0.25-0.36",0.9,"0.76-1.07",1,"0.87-1.17"
 "2-4 h",0.71,"(0.64-0.79)",0.9,"0.80-1.00",0.66,"0.59-0.74",0.6,"0.51-0.70",0.4,"0.32-0.50",0.23,"0.18-0.30",0.73,"0.65-0.82",0.45,"0.39-0.53",1.67,"1.42-1.96",0.96,"0.83-1.10"
 "4-6 h",0.87,"(0.77-0.97)",1.08,"0.96-1.21",0.82,"0.73-0.92",0.7,"0.59-0.82",0.45,"0.36-0.56",0.29,"0.22-0.38",1,"0.89-1.11",0.62,"0.53-0.73",2.55,"2.17-2.98",0.93,"0.80-1.07"

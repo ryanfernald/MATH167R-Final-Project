@@ -10,6 +10,7 @@ format:
 
 ```{r}
 library(tidyverse)
+library(ggthemes)
 ```
 
 ```{r}
@@ -30,8 +31,10 @@ head(filtered_data)
 ```{r}
 ggplot(data = filtered_data, aes(x = Usage,
                                  y = Stress_perception)) +
-  geom_line() +
-  labs(title = "Anxiety vs. Screen Time",
+  geom_bar(stat = "identity", fill = "darkcyan") +
+  theme_wsj(base_size = 8) +
+      theme(axis.title=element_text(size=12)) + 
+  labs(title = "Cellphone usage and \nStress perception",
        x = "Screen Time (hours/day)",
-       y = "Anxiety (0-21)")
+       y = "Stress Level")
 ```
