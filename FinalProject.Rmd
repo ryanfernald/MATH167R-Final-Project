@@ -38,3 +38,102 @@ ggplot(data = filtered_data, aes(x = Usage,
        x = "Screen Time (hours/day)",
        y = "Stress Level")
 ```
+
+```{r}
+ggplot(data = filtered_data, aes(x = Usage,
+                                 y = Sleep_dissatisfaction)) +
+  geom_bar(stat = "identity", fill = "darkred") +
+  theme_wsj(base_size = 8) +
+      theme(axis.title=element_text(size=12)) + 
+  labs(title = "Cellphone usage and \nSleep Dissatisfaction",
+       x = "Screen Time (hours/day)",
+       y = "Sleep Dissatisfaction")
+```
+
+```{r}
+ggplot(data = filtered_data, aes(x = Usage,
+                                 y = Depressive_symptoms)) +
+  geom_bar(stat = "identity", fill = "brown") +
+  theme_wsj(base_size = 8) +
+      theme(axis.title=element_text(size=12)) + 
+  labs(title = "Cellphone usage and \nDepressive Symptoms",
+       x = "Screen Time (hours/day)",
+       y = "Depressive Symptoms")
+```
+
+```{r}
+ggplot(data = filtered_data, aes(x = Usage,
+                                 y = Suicidal_idea)) +
+  geom_bar(stat = "identity", fill = "maroon") +
+  theme_wsj(base_size = 8) +
+      theme(axis.title=element_text(size=12)) + 
+  labs(title = "Cellphone usage and \n Suicidal Thoughts",
+       x = "Screen Time (hours/day)",
+       y = "Suicidal Thoughts")
+```
+
+```{r}
+ggplot(data = filtered_data, aes(x = Usage,
+                                 y = Suicidal_plan)) +
+  geom_bar(stat = "identity", fill = "grey") +
+  theme_wsj(base_size = 8) +
+      theme(axis.title=element_text(size=12)) + 
+  labs(title = "Cellphone usage and \n Suicidal plan",
+       x = "Screen Time (hours/day)",
+       y = "Suicidal plan")
+```
+
+```{r}
+ggplot(data = filtered_data, aes(x = Usage,
+                                 y = Suicidal_attempt)) +
+  geom_bar(stat = "identity", fill = "darkorange") +
+  theme_wsj(base_size = 8) +
+      theme(axis.title=element_text(size=12)) + 
+  labs(title = "Cellphone usage and \n Suicidal attempt",
+       x = "Screen Time (hours/day)",
+       y = "Suicidal attempt")
+```
+
+```{r}
+ggplot(data = filtered_data, aes(x = Usage,
+                                 y = Alcohol)) +
+  geom_bar(stat = "identity", fill = "coral4") +
+  theme_wsj(base_size = 8) +
+      theme(axis.title=element_text(size=12)) + 
+  labs(title = "Cellphone usage and \n Alcohol",
+       x = "Screen Time (hours/day)",
+       y = "Alcohol")
+```
+
+```{r}
+ggplot(data = filtered_data, aes(x = Usage,
+                                 y = Smoking)) +
+  geom_bar(stat = "identity", fill = "darkgoldenrod") +
+  theme_wsj(base_size = 8) +
+      theme(axis.title=element_text(size=12)) + 
+  labs(title = "Cellphone usage and \n Smoking",
+       x = "Screen Time (hours/day)",
+       y = "Smoking")
+```
+
+```{r}
+ggplot(data = filtered_data, aes(x = Usage,
+                                 y = Smartphone_overdependence)) +
+  geom_bar(stat = "identity", fill = "aquamarine5") +
+  theme_wsj(base_size = 8) +
+      theme(axis.title=element_text(size=12)) + 
+  labs(title = "Cellphone usage and \n Smartphone overdependence",
+       x = "Screen Time (hours/day)",
+       y = "Smartphone overdependence")
+```
+
+```{r}
+ggplot(data = filtered_data, aes(x = Usage,
+                                 y = Obesity)) +
+  geom_bar(stat = "identity", fill = "darkseagreen") +
+  theme_wsj(base_size = 8) +
+      theme(axis.title=element_text(size=12)) + 
+  labs(title = "Cellphone usage and \n Obesity",
+       x = "Screen Time (hours/day)",
+       y = "Obesity")
+```
