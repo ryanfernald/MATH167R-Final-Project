@@ -138,3 +138,10 @@ ggplot(data = filtered_data, aes(x = Usage,
        x = "Screen Time (hours/day)",
        y = "Obesity")
 ```
+
+```{r}
+x <- read.csv("https://raw.githubusercontent.com/ryanfernald/MATH167R-Final-Project/main/DATA/Association%20between%20smartphone%20usage%20and%20health%20outcomes%20of%20adolescents%20as%20Percentages.csv")
+x
+
+```
+
