@@ -10,6 +10,7 @@ format:
 
 ```{r}
 library(tidyverse)
+library(ggplot2)
 library(ggthemes)
 ```
 
@@ -119,7 +120,7 @@ ggplot(data = filtered_data, aes(x = Usage,
 ```{r}
 ggplot(data = filtered_data, aes(x = Usage,
                                  y = Smartphone_overdependence)) +
-  geom_bar(stat = "identity", fill = "aquamarine5") +
+  geom_bar(stat = "identity", fill = "aquamarine4") +
   theme_wsj(base_size = 8) +
       theme(axis.title=element_text(size=12)) + 
   labs(title = "Cellphone usage and \n Smartphone overdependence",
