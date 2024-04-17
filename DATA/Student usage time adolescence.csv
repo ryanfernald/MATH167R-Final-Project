@@ -1,0 +1,11 @@
+Day_type,Time on smartphone,2017 Count (n = 61861),Weighted Percentage,2020 Count (n = 54809),Weighted Percentage
+Weekday,0 - 2 h/day,31481,51.3,12689,23.1
+Weekday,2 - 4 h/day,17775,28.7,18633,34.4
+Weekday,4 + h/day,12605,20,23487,42.5
+Weekend,0 - 2 h/day,18713,29.9,6914,13.2
+Weekend,2 - 4 h/day,15778,26.2,11637,21.9
+Weekend,4 + h/day,27910,44,36258,64.9
+Daily Average,0 - 2 h/day,218763,35.7,7688,14.4
+Daily Average,2 - 4 h/day,20568,33.7,16555,30.6
+Daily Average,4 + h/day,19420,30.6,30566,55.1
+Smartphone Overdependence,,,,13740,25.5
