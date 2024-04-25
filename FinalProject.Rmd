@@ -177,8 +177,103 @@ multiplot_set1
 multiplot_set2
 ```
 
+
+
 ```{r}
-x <- read.csv("https://raw.githubusercontent.com/ryanfernald/MATH167R-Final-Project/main/DATA/Association%20between%20smartphone%20usage%20and%20health%20outcomes%20of%20adolescents%20as%20Percentages.csv")
-x
+data <- data.frame(
+Day_type = c(rep("Weekday", 3), rep("Weekend", 3), rep("Daily Average", 3)),
+Time_Category = rep(c("0 - 2 h/day", "2 - 4 h/day", "4 + h/day"), 3),
+Count = c(31481, 17775, 12605, 18713, 15778, 27910, 218763, 20568, 19420)
+)
+# Bar Plot
+bar_plot <- ggplot(data, aes(x = Day_type, y = Count, fill = Time_Category)) +
+geom_bar(stat = "identity") +
+labs(title = "Smartphone Usage by Day Type and Time Category",
+x = "Day Type",
+y = "Count") +
+theme_minimal() +
+theme(legend.position = "bottom")
+# Stacked Bar Plot
+stacked_bar_plot <- ggplot(data, aes(x = Day_type, y = Count, fill = Time_Category)) +
+geom_bar(stat = "identity") +
+labs(title = "Smartphone Usage by Day Type and Time Category",
+x = "Day Type",
+y = "Count") +
+theme_minimal() +
+theme(legend.position = "bottom") +
+coord_flip()
+
+
+# Pie Chart
+pie_chart <- ggplot(data, aes(x = "", y = Count, fill = Time_Category)) +
+geom_bar(stat = "identity", width = 1) +
+coord_polar("y", start = 0) +
+labs(title = "Proportion of Smartphone Usage by Time Category",
+x = NULL,
+y = NULL) +
+theme_void() +
+theme(legend.position = "right")
+# Display the graphs
+print(bar_plot)
+print(stacked_bar_plot)
+
+
+print(pie_chart)
+library(ggplot2)
+# Create a dataframe with the data
+data <- data.frame(
+Day_type = c(rep("Weekday", 3), rep("Weekend", 3), rep("Daily Average", 3)),
+Time_Category = rep(c("0 - 2 h/day", "2 - 4 h/day", "4 + h/day"), 3),
+Count = c(31481, 17775, 12605, 18713, 15778, 27910, 218763, 20568, 19420)
+)
+
+library(ggplot2)
+# Create a dataframe with the data
+data <- data.frame(
+Day_type = c(rep("Weekday", 3), rep("Weekend", 3), rep("Daily Average", 3)),
+Time_Category = rep(c("0 - 2 h/day", "2 - 4 h/day", "4 + h/day"), 3),
+Count = c(31481, 17775, 12605, 18713, 15778, 27910, 218763, 20568, 19420)
+)
+
+# Density Plot
+density_plot <- ggplot(data, aes(x = Count, fill = Time_Category)) +
+geom_density(alpha = 0.5) +
+labs(title = "Density of Smartphone Usage by Time Category",
+x = "Count",
+y = "Density") +
+theme_minimal()
+print(density_plot)
+library(ggplot2)
+# Create a dataframe with the data
+data <- data.frame(
+Day_type = c(rep("Weekday", 3), rep("Weekend", 3), rep("Daily Average", 3)),
+Time_Category = rep(c("0 - 2 h/day", "2 - 4 h/day", "4 + h/day"), 3),
+Count = c(31481, 17775, 12605, 18713, 15778, 27910, 218763, 20568, 19420)
+)
+
+
+# Remove Daily Average row for heatmap
+no_daily <- data[data$Day_type != "Daily Average", ]
+
+# Heatmap
+heatmap <- ggplot(no_daily, aes(x = Time_Category, y = Day_type, fill = Count)) +
+geom_tile() +
+labs(title = "Smartphone Usage Heatmap",
+x = "Time Category",
+y = "Day Type",
+fill = "Count") +
+theme_minimal()
+print(heatmap)
+# Convert data to wide format for heatmap
+library(tidyr)
+library(ggplot2)
+# Create a dataframe with the data
+data <- data.frame(
+Day_type = c(rep("Weekday", 3), rep("Weekend", 3), rep("Daily Average", 3)),
+Time_Category = rep(c("0 - 2 h/day", "2 - 4 h/day", "4 + h/day"), 3),
+Count = c(31481, 17775, 12605, 18713, 15778, 27910, 218763, 20568, 19420)
+)
+
 
 ```
+
