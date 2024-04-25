@@ -1,5 +1,5 @@
 data <- data.frame(
-  Usage = c("0 h", "0-2 h", "2-4 h", "4-6 h", "6-8 h", "8+ h"),
+  Usage = c("0-0 h", "0-2 h", "2-4 h", "4-6 h", "6-8 h", "8+ h"),
   Stress_perception = c(1.00, 0.70, 0.71, 0.87, 1.04, 1.28),
   Stress_percentage_interval = c(NA, "(0.62-0.79)", "(0.64-0.79)", "(0.77-0.97)", "(0.93-1.17) ", "(1.14-1.43) "),
   Sleep_dissatisfaction = c(1.00, 0.73, 0.90, 1.08, 1.22, 1.39),
@@ -27,3 +27,4 @@ print(data)
 file_path = "C:\\Users\\Ryan Fernald\\Documents\\GitHub\\MATH167R-Final-Project\\DATA\\smartphone_usage_time_and_health_variable_outcomes.csv"
 
 write.csv(data, file = file_path, row.names = FALSE)
+
