@@ -140,7 +140,7 @@ ggplot(data = filtered_data, aes(x = Usage,
        y = "Obesity")
 ```
 
-```{r}
+```{r, height = }
 colors <- c("darkred", "darkcyan", "darkblue", "darkgreen", "darkorange", "purple", "darkgray", "darkmagenta", "darkolivegreen", "darkslategray")
 
 # Split variables into two sets
@@ -276,4 +276,29 @@ Count = c(31481, 17775, 12605, 18713, 15778, 27910, 218763, 20568, 19420)
 
 
 ```
+
+```{r}
+
+# Load the dataset from the uploaded CSV file
+x <- "https://raw.githubusercontent.com/ryanfernald/MATH167R-Final-Project/main/DATA/Percentages%20stats%20health%20outcomes.csv"
+data <- read.csv(x)
+
+# Reshape the data to a long format
+data_long <- gather(data, key = "Health_Outcome", value = "Percentage", -Usage)
+
+# Create the ggplot with multiple bar graphs
+ggplot(data_long, aes(x = Health_Outcome, y = Percentage, fill = Usage)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  scale_fill_manual(values = c("< 4 Hours per day" = "maroon", "> 4 Hours Per day" = "darkcyan")) +
+  labs(
+    title = "Comparison of Health Outcomes by Smartphone Usage",
+    x = "Health Outcome",
+    y = "Percentage (%)"
+  ) +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),  # Rotate x-axis labels for readability
+    plot.title = element_text(hjust = 0.5)  # Center the title
+  )
+```
+
 
