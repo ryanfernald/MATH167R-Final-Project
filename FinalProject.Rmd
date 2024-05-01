@@ -226,11 +226,16 @@ h <- "https://raw.githubusercontent.com/ryanfernald/MATH167R-Final-Project/main/
 data <- read.csv(h)
 ```
 
-
-```{r, fig.height = 7, fig.width = 10}
+```{r}
+data_long <- data |>
+  pivot_longer(cols = -Usage, 
+               names_to = "Health_Outcome", 
+               values_to = "Percentage")
 
 data_long$Health_Outcome <- factor(data_long$Health_Outcome, levels = unique(data_long$Health_Outcome))
+```
 
+```{r, fig.height = 7, fig.width = 10}
 ggplot(data_long, aes(x = Health_Outcome, y = Percentage, fill = Usage, label = Percentage)) +
   geom_bar(stat = "identity", position = "dodge") +
   geom_text(position = position_dodge(width = 0.9), size = 3, vjust = -0.5) +  # Add labels directly on top of bars with dodge position
@@ -254,20 +259,34 @@ wdata[wdata == "."] <- NA
 
 ## Inferential analysis 
 
-What are the health risks associated with excessive smartphone and social media use leading to isolation, and how does this impact different demographic groups in terms of social interactions and behaviors?
+# What are the health risks associated with excessive smartphone and social media use leading to isolation, and how does this impact different demographic groups in terms of social interactions and behaviors?
 
 ```{r}
 ggplot(wdata, aes(x = as.numeric(ExcessveSmrtPhn_Use), y = as.numeric(TotAddiction_Score))) +
   geom_point() +
   geom_smooth(method = "lm", color = "blue")+theme(axis.text.y=element_text(size=5))
 ```
+
 ```{r}
 wdata <- na.omit(wdata)
 
-lm_model <- lm(ExcessveSmrtPhn_Use ~ TotAddiction_Score, data = wdata, na.action = na.exclude)
+lm_model <- lm(as.numeric(ExcessveSmrtPhn_Use) ~ as.numeric(TotAddiction_Score), data = wdata, na.action = na.exclude)
 
 lm_model
 
 summary(lm_model)
+```
+
+
+```{r}
+ggplot(wdata, aes(x = as.numeric(AgeStrt_useSmrtPhne), y = as.numeric(TotAddiction_Score))) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", color = "blue")+theme(axis.text.y=element_text(size=5))
+```
+
+```{r}
+lm_model <- lm(as.numeric(AgeStrt_useSmrtPhne) ~ as.numeric(TotAddiction_Score), data = wdata, na.action = na.exclude)
+
+lm_model
 ```
 
