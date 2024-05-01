@@ -270,11 +270,23 @@ ggplot(wdata, aes(x = as.numeric(ExcessveSmrtPhn_Use), y = as.numeric(TotAddicti
 ```{r}
 wdata <- na.omit(wdata)
 
-lm_model <- lm(as.numeric(ExcessveSmrtPhn_Use) ~ as.numeric(TotAddiction_Score), data = wdata, na.action = na.exclude)
+lm_model <- lm(as.numeric(TotAddiction_Score) ~ as.numeric(ExcessveSmrtPhn_Use) , data = wdata, na.action = na.exclude)
+#lm(y,x,data) this is the format for the graph we did
+
 
 lm_model
 
 summary(lm_model)
+# why this model and why it relates
+#what is the model 
+# what x is and y
+# after fit the model here r the estimated perametters
+#interperet the perametters
+# look at a hypothsis test for beta 1  
+
+# look at p value for hypothesis testing 
+
+#Intersept and slope 
 ```
 
 
