@@ -257,9 +257,9 @@ wdata[wdata == "."] <- NA
 What are the health risks associated with excessive smartphone and social media use leading to isolation, and how does this impact different demographic groups in terms of social interactions and behaviors?
 
 ```{r}
-ggplot(wdata, aes(x = ExcessveSmrtPhn_Use, y = TotAddiction_Score)) +
-  geom_point(alpha = .5) +
-  geom_smooth(method = "lm", color = "blue", na.rm = TRUE)
+ggplot(wdata, aes(x = as.numeric(ExcessveSmrtPhn_Use), y = as.numeric(TotAddiction_Score))) +
+  geom_point() +
+  geom_smooth(method = "lm", color = "blue")+theme(axis.text.y=element_text(size=5))
 ```
 ```{r}
 wdata <- na.omit(wdata)
