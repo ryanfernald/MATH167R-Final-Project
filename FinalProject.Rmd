@@ -248,9 +248,26 @@ ggplot(data_long, aes(x = Health_Outcome, y = Percentage, fill = Usage, label = 
 
 ```{r}
 w <- "https://raw.githubusercontent.com/ryanfernald/MATH167R-Final-Project/main/DATA/Depression%2C%20anxiety%2C%20and%20smartphone%20addiction%20in%20university%20students-%20A%20cross%20sectional%20study.csv"
-data <- read.csv(w)
+wdata <- read.csv(w)
+wdata[wdata == "."] <- NA
 ```
 
 ## Inferential analysis 
 
 What are the health risks associated with excessive smartphone and social media use leading to isolation, and how does this impact different demographic groups in terms of social interactions and behaviors?
+
+```{r}
+ggplot(wdata, aes(x = ExcessveSmrtPhn_Use, y = TotAddiction_Score)) +
+  geom_point(alpha = .5) +
+  geom_smooth(method = "lm", color = "blue", na.rm = TRUE)
+```
+```{r}
+wdata <- na.omit(wdata)
+
+lm_model <- lm(ExcessveSmrtPhn_Use ~ TotAddiction_Score, data = wdata, na.action = na.exclude)
+
+lm_model
+
+summary(lm_model)
+```
+
