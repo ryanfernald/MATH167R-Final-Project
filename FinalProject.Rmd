@@ -26,7 +26,6 @@ head(data)
 
 ```{r}
 filtered_data <- data[, c(1:2, seq(4, ncol(data), by = 2))]
-
 head(filtered_data)
 ```
 
@@ -65,39 +64,6 @@ ggplot(data = filtered_data, aes(x = Usage,
 
 ```{r}
 ggplot(data = filtered_data, aes(x = Usage,
-                                 y = Suicidal_idea)) +
-  geom_bar(stat = "identity", fill = "maroon") +
-  theme_wsj(base_size = 8) +
-      theme(axis.title=element_text(size=12)) + 
-  labs(title = "Cellphone usage and \n Suicidal Thoughts",
-       x = "Screen Time (hours/day)",
-       y = "Suicidal Thoughts")
-```
-
-```{r}
-ggplot(data = filtered_data, aes(x = Usage,
-                                 y = Suicidal_plan)) +
-  geom_bar(stat = "identity", fill = "grey") +
-  theme_wsj(base_size = 8) +
-      theme(axis.title=element_text(size=12)) + 
-  labs(title = "Cellphone usage and \n Suicidal plan",
-       x = "Screen Time (hours/day)",
-       y = "Suicidal plan")
-```
-
-```{r}
-ggplot(data = filtered_data, aes(x = Usage,
-                                 y = Suicidal_attempt)) +
-  geom_bar(stat = "identity", fill = "darkorange") +
-  theme_wsj(base_size = 8) +
-      theme(axis.title=element_text(size=12)) + 
-  labs(title = "Cellphone usage and \n Suicidal attempt",
-       x = "Screen Time (hours/day)",
-       y = "Suicidal attempt")
-```
-
-```{r}
-ggplot(data = filtered_data, aes(x = Usage,
                                  y = Alcohol)) +
   geom_bar(stat = "identity", fill = "coral4") +
   theme_wsj(base_size = 8) +
@@ -105,17 +71,6 @@ ggplot(data = filtered_data, aes(x = Usage,
   labs(title = "Cellphone usage and \n Alcohol",
        x = "Screen Time (hours/day)",
        y = "Alcohol")
-```
-
-```{r}
-ggplot(data = filtered_data, aes(x = Usage,
-                                 y = Smoking)) +
-  geom_bar(stat = "identity", fill = "darkgoldenrod") +
-  theme_wsj(base_size = 8) +
-      theme(axis.title=element_text(size=12)) + 
-  labs(title = "Cellphone usage and \n Smoking",
-       x = "Screen Time (hours/day)",
-       y = "Smoking")
 ```
 
 ```{r}
@@ -129,18 +84,8 @@ ggplot(data = filtered_data, aes(x = Usage,
        y = "Smartphone overdependence")
 ```
 
-```{r}
-ggplot(data = filtered_data, aes(x = Usage,
-                                 y = Obesity)) +
-  geom_bar(stat = "identity", fill = "darkseagreen") +
-  theme_wsj(base_size = 8) +
-      theme(axis.title=element_text(size=12)) + 
-  labs(title = "Cellphone usage and \n Obesity",
-       x = "Screen Time (hours/day)",
-       y = "Obesity")
-```
 
-```{r, height = }
+```{r, fig.height = 7, fig.width = 10}
 colors <- c("darkred", "darkcyan", "darkblue", "darkgreen", "darkorange", "purple", "darkgray", "darkmagenta", "darkolivegreen", "darkslategray")
 
 # Split variables into two sets
@@ -276,19 +221,19 @@ Count = c(31481, 17775, 12605, 18713, 15778, 27910, 218763, 20568, 19420)
 
 
 ```
-
 ```{r}
+h <- "https://raw.githubusercontent.com/ryanfernald/MATH167R-Final-Project/main/DATA/Percentages%20stats%20health%20outcomes.csv"
+data <- read.csv(h)
+```
 
-# Load the dataset from the uploaded CSV file
-x <- "https://raw.githubusercontent.com/ryanfernald/MATH167R-Final-Project/main/DATA/Percentages%20stats%20health%20outcomes.csv"
-data <- read.csv(x)
 
-# Reshape the data to a long format
-data_long <- gather(data, key = "Health_Outcome", value = "Percentage", -Usage)
+```{r, fig.height = 7, fig.width = 10}
 
-# Create the ggplot with multiple bar graphs
-ggplot(data_long, aes(x = Health_Outcome, y = Percentage, fill = Usage)) +
+data_long$Health_Outcome <- factor(data_long$Health_Outcome, levels = unique(data_long$Health_Outcome))
+
+ggplot(data_long, aes(x = Health_Outcome, y = Percentage, fill = Usage, label = Percentage)) +
   geom_bar(stat = "identity", position = "dodge") +
+  geom_text(position = position_dodge(width = 0.9), size = 3, vjust = -0.5) +  # Add labels directly on top of bars with dodge position
   scale_fill_manual(values = c("< 4 Hours per day" = "maroon", "> 4 Hours Per day" = "darkcyan")) +
   labs(
     title = "Comparison of Health Outcomes by Smartphone Usage",
@@ -296,9 +241,16 @@ ggplot(data_long, aes(x = Health_Outcome, y = Percentage, fill = Usage)) +
     y = "Percentage (%)"
   ) +
   theme(
-    axis.text.x = element_text(angle = 45, hjust = 1),  # Rotate x-axis labels for readability
-    plot.title = element_text(hjust = 0.5)  # Center the title
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    plot.title = element_text(hjust = 0.5)
   )
 ```
 
+```{r}
+w <- "https://raw.githubusercontent.com/ryanfernald/MATH167R-Final-Project/main/DATA/Depression%2C%20anxiety%2C%20and%20smartphone%20addiction%20in%20university%20students-%20A%20cross%20sectional%20study.csv"
+data <- read.csv(w)
+```
 
+## Inferential analysis 
+
+What are the health risks associated with excessive smartphone and social media use leading to isolation, and how does this impact different demographic groups in terms of social interactions and behaviors?
