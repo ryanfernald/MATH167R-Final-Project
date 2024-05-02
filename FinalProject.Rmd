@@ -208,6 +208,29 @@ Count = c(31481, 17775, 12605, 18713, 15778, 27910, 218763, 20568, 19420)
 
 
 ```
+```{r, warning=FALSE,message=FALSE}
+c17 <- ggplot(na.omit(student_time), aes(x = "",
+                                  y = as.numeric(`2017 Count (n = 61861)`),
+                                   fill =`Time on smartphone`))+
+  geom_bar(stat = "identity", width = 0.5)+
+  coord_polar("y", start = 0)+
+  labs(title = "Proportion of Smartphone \n Usage by Time Category \n             in 2017") +
+                  theme_void() 
+                  theme(legend.position = "NA")# Add labels directly on top of bars with dodge position
+
+
+c20 <- ggplot(na.omit(student_time), aes(x = "",
+                                  y = as.numeric(`2020 Count (n = 54809)`),
+                                  fill =`Time on smartphone`))+
+  geom_bar(stat = "identity")+
+  coord_polar("y", start = 0)+
+  labs(title = "Proportion of Smartphone \n Usage by Time Category \n            in 2020") +
+                  theme_void() +
+                  theme(legend.position = "right")# Add labels directly on top of bars with dodge position
+
+ plot_grid(c17, c20, ncol=2)
+```
+
 
 ```{r, warning=FALSE}
 h <- "https://raw.githubusercontent.com/ryanfernald/MATH167R-Final-Project/main/DATA/Percentages%20stats%20health%20outcomes.csv"
