@@ -258,15 +258,20 @@ wdata[wdata == "."] <- NA
 ```
 
 ```{r, warning=FALSE, fig.height = 4, fig.width = 8}
-ggplot(wdata, aes(y = as.numeric(TotAddiction_Score), x = as.numeric(ExcessveSmrtPhn_Use))) +
+ggplot(wdata, aes(y = as.numeric(TotAddiction_Score), 
+                  x = as.numeric(ExcessveSmrtPhn_Use))) +
   geom_point(aes(color = "maroon"), alpha = 0.4) +
   geom_smooth(aes(color = "maroon"), method = "lm") +
   
-  geom_point(aes(x = as.numeric(Rstlss_NoSmrtphn), color = "darkcyan"), alpha = 0.4) +
-  geom_smooth(aes(x = as.numeric(Rstlss_NoSmrtphn), color = "darkcyan"), method = "lm") +
+  geom_point(aes(x = as.numeric(Rstlss_NoSmrtphn),
+                 color = "darkcyan"), alpha = 0.4) +
+  geom_smooth(aes(x = as.numeric(Rstlss_NoSmrtphn),
+                  color = "darkcyan"), method = "lm") +
   
-  geom_point(aes(x = as.numeric(DcreasdSlpTimeQulty_SmrtPhnUse), color = "darkgoldenrod"), alpha = 0.4) +
-  geom_smooth(aes(x = as.numeric(DcreasdSlpTimeQulty_SmrtPhnUse), color = "darkgoldenrod"), method = "lm") +
+  geom_point(aes(x = as.numeric(DcreasdSlpTimeQulty_SmrtPhnUse),
+                 color = "darkgoldenrod"), alpha = 0.4) +
+  geom_smooth(aes(x = as.numeric(DcreasdSlpTimeQulty_SmrtPhnUse),
+                  color = "darkgoldenrod"), method = "lm") +
   
   labs(
     title = "Regression Model of Smartphone Usage and Addiction",
@@ -282,16 +287,25 @@ ggplot(wdata, aes(y = as.numeric(TotAddiction_Score), x = as.numeric(ExcessveSmr
 ```
 
 ```{r}
-#lm_model_1 <- lm(as.numeric(TotAddiction_Score) ~ as.numeric(ExcessveSmrtPhn_Use), data = wdata, na.action = na.exclude)
-#summary(lm_model_1)
+# lm_model_1 <- lm(as.numeric(TotAddiction_Score) ~ 
+#                  as.numeric(ExcessveSmrtPhn_Use),
+#                  data = wdata, na.action = na.exclude)
+# summary(lm_model_1)
+# 
+# lm_model_2 <- lm(as.numeric(TotAddiction_Score) ~ 
+#                  as.numeric(Rstlss_NoSmrtphn),
+#                  data = wdata, na.action = na.exclude)
+# lm_model_2
+# 
+# lm_model_3 <- lm(as.numeric(TotAddiction_Score) ~ as.numeric(DcreasdSlpTimeQulty_SmrtPhnUse),
+#                  xdata = wdata, na.action = na.exclude)
+# lm_model_3
 
-#lm_model_2 <- lm(as.numeric(TotAddiction_Score) ~ as.numeric(Rstlss_NoSmrtphn), data = wdata, na.action = na.exclude)
-#lm_model_2
-
-#lm_model_3 <- lm(as.numeric(TotAddiction_Score) ~ as.numeric(DcreasdSlpTimeQulty_SmrtPhnUse), data = wdata, na.action = na.exclude)
-#lm_model_3
-
-lm_model_combined <- lm(as.numeric(TotAddiction_Score) ~ as.numeric(ExcessveSmrtPhn_Use) + as.numeric(Rstlss_NoSmrtphn) + as.numeric(DcreasdSlpTimeQulty_SmrtPhnUse), data = wdata, na.action = na.exclude)
+lm_model_combined <- lm(as.numeric(TotAddiction_Score) ~ 
+                        as.numeric(ExcessveSmrtPhn_Use) +
+                        as.numeric(Rstlss_NoSmrtphn) + 
+                        as.numeric(DcreasdSlpTimeQulty_SmrtPhnUse),
+                        data = wdata, na.action = na.exclude)
 summary(lm_model_combined)
 
 ```
@@ -308,6 +322,7 @@ $\epsilon \sim N(O, \sigma^2)$
 
 $\beta_0$ is the intercept. $\beta_1$ is ExcessveSmrtPhn_Use $\beta_2$ is Rstlss_NoSmrtphn $\beta_3$ is DcreasdSlpTimeQulty_SmrtPhnUse
 
+\newpage
 #### What is the model, What x is and y
 
 The model is a linear regression model that predicts the total addiction score (y) based on one or more independent variables (x), such as excessive smartphone usage, restlessness without smartphone, and decreased sleep time quality due to smartphone use.
@@ -335,14 +350,17 @@ Each of our factors is being tested against the dependent variable of Total addi
 \newpage
 
 ```{r}
-ggplot(wdata, aes(x = as.numeric(AgeStrt_useSmrtPhne), y = as.numeric(TotAddiction_Score))) +
+ggplot(wdata, aes(x = as.numeric(AgeStrt_useSmrtPhne),
+                  y = as.numeric(TotAddiction_Score))) +
   geom_point(alpha = 0.5) +
-  geom_smooth(method = "lm", color = "blue")+theme(axis.text.y=element_text(size=5))
+  geom_smooth(method = "lm", color = "blue")+
+  theme(axis.text.y=element_text(size=5))
 ```
 
 ```{r}
-lm_model <- lm(as.numeric(AgeStrt_useSmrtPhne) ~ as.numeric(TotAddiction_Score), data = wdata, na.action = na.exclude)
-
+lm_model <- lm(as.numeric(AgeStrt_useSmrtPhne) ~
+               as.numeric(TotAddiction_Score),
+               data = wdata, na.action = na.exclude)
 lm_model
 ```
 
