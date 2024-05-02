@@ -8,14 +8,14 @@ format:
     code-summary: "Code"
 ---
 
-```{r}
+```{r, warning=FALSE}
 library(tidyverse)
 library(ggplot2)
 library(ggthemes)
 library(patchwork)
 ```
 
-```{r}
+```{r, warning=FALSE}
 
 x <- "https://raw.githubusercontent.com/ryanfernald/MATH167R-Final-Project/main/DATA/smartphone_usage_time_and_health_variable_outcomes.csv"
 
@@ -24,12 +24,12 @@ data <- read.csv(x)
 head(data)
 ```
 
-```{r}
+```{r, warning=FALSE}
 filtered_data <- data[, c(1:2, seq(4, ncol(data), by = 2))]
 head(filtered_data)
 ```
 
-```{r}
+```{r, warning=FALSE}
 ggplot(data = filtered_data, aes(x = Usage,
                                  y = Stress_perception)) +
   geom_bar(stat = "identity", fill = "darkcyan") +
@@ -40,7 +40,7 @@ ggplot(data = filtered_data, aes(x = Usage,
        y = "Stress Level")
 ```
 
-```{r}
+```{r, warning=FALSE}
 ggplot(data = filtered_data, aes(x = Usage,
                                  y = Sleep_dissatisfaction)) +
   geom_bar(stat = "identity", fill = "darkred") +
@@ -62,7 +62,7 @@ ggplot(data = filtered_data, aes(x = Usage,
        y = "Depressive Symptoms")
 ```
 
-```{r}
+```{r, warning=FALSE}
 ggplot(data = filtered_data, aes(x = Usage,
                                  y = Alcohol)) +
   geom_bar(stat = "identity", fill = "coral4") +
@@ -73,7 +73,7 @@ ggplot(data = filtered_data, aes(x = Usage,
        y = "Alcohol")
 ```
 
-```{r}
+```{r, warning=FALSE}
 ggplot(data = filtered_data, aes(x = Usage,
                                  y = Smartphone_overdependence)) +
   geom_bar(stat = "identity", fill = "aquamarine4") +
@@ -84,15 +84,12 @@ ggplot(data = filtered_data, aes(x = Usage,
        y = "Smartphone overdependence")
 ```
 
-
-```{r, fig.height = 7, fig.width = 10}
+```{r, fig.height = 7, fig.width = 10, warning=FALSE}
 colors <- c("darkred", "darkcyan", "darkblue", "darkgreen", "darkorange", "purple", "darkgray", "darkmagenta", "darkolivegreen", "darkslategray")
 
-# Split variables into two sets
 vars_set1 <- names(filtered_data)[-1][1:5]
 vars_set2 <- names(filtered_data)[-1][6:10]
 
-# Function to create plots for a set of variables
 create_plots <- function(vars, title_prefix) {
   plots <- lapply(vars, function(var) {
     ggplot(data = filtered_data, aes_string(x = "Usage", y = var)) +
@@ -106,25 +103,15 @@ create_plots <- function(vars, title_prefix) {
   return(multiplot)
 }
 
-# Create plots for set 1
 multiplot_set1 <- create_plots(vars_set1, "Set 1:")
 
-# Save set 1
-ggsave("plots_set1.png", multiplot_set1, width = 10, height = 10)
-
-# Create plots for set 2
 multiplot_set2 <- create_plots(vars_set2, "Set 2:")
-
-# Save set 2
-ggsave("plots_set2.png", multiplot_set2, width = 10, height = 10)
 
 multiplot_set1
 multiplot_set2
 ```
 
-
-
-```{r}
+```{r, warning=FALSE}
 data <- data.frame(
 Day_type = c(rep("Weekday", 3), rep("Weekend", 3), rep("Daily Average", 3)),
 Time_Category = rep(c("0 - 2 h/day", "2 - 4 h/day", "4 + h/day"), 3),
@@ -221,12 +208,13 @@ Count = c(31481, 17775, 12605, 18713, 15778, 27910, 218763, 20568, 19420)
 
 
 ```
-```{r}
+
+```{r, warning=FALSE}
 h <- "https://raw.githubusercontent.com/ryanfernald/MATH167R-Final-Project/main/DATA/Percentages%20stats%20health%20outcomes.csv"
 data <- read.csv(h)
 ```
 
-```{r}
+```{r, warning=FALSE}
 data_long <- data |>
   pivot_longer(cols = -Usage, 
                names_to = "Health_Outcome", 
@@ -235,7 +223,7 @@ data_long <- data |>
 data_long$Health_Outcome <- factor(data_long$Health_Outcome, levels = unique(data_long$Health_Outcome))
 ```
 
-```{r, fig.height = 7, fig.width = 10}
+```{r, fig.height = 7, fig.width = 10, warning=FALSE}
 ggplot(data_long, aes(x = Health_Outcome, y = Percentage, fill = Usage, label = Percentage)) +
   geom_bar(stat = "identity", position = "dodge") +
   geom_text(position = position_dodge(width = 0.9), size = 3, vjust = -0.5) +  # Add labels directly on top of bars with dodge position
@@ -251,44 +239,100 @@ ggplot(data_long, aes(x = Health_Outcome, y = Percentage, fill = Usage, label = 
   )
 ```
 
-```{r}
+\newpage
+
+# Inferential analysis
+
+## Research Question: What are the health risks associated with excessive smartphone and social media use leading to isolation, and how does this impact different demographic groups in terms of social interactions and behaviors?
+
+### Findings:
+
+The study conducted by Matar Boumosleh and Daniel Jaalouk (2017) explored the relationship between excessive smartphone usage, addiction metrics, and mental health outcomes among university students.The study found a significant association between excessive smartphone usage and symptoms of depression and anxiety among university students. This suggests that students who reported spending more time on their smartphones were more likely to experience higher levels of depression and anxiety.The researchers used the Smartphone Addiction Inventory (SPAI) Scale to measure smartphone addiction among participants. They found that higher scores on the SPAI Scale, indicating greater levels of smartphone addiction, were correlated with higher levels of depression and anxiety.
+
+To test this we have a variety of features in our data which we can use to create linear regression models such as excessive smartphone usage, restlessness symptoms without smartphone, and decreased sleep time, and quality due to smartphone use.
+
+```{r, warning=FALSE}
 w <- "https://raw.githubusercontent.com/ryanfernald/MATH167R-Final-Project/main/DATA/Depression%2C%20anxiety%2C%20and%20smartphone%20addiction%20in%20university%20students-%20A%20cross%20sectional%20study.csv"
 wdata <- read.csv(w)
 wdata[wdata == "."] <- NA
 ```
 
-## Inferential analysis 
-
-# What are the health risks associated with excessive smartphone and social media use leading to isolation, and how does this impact different demographic groups in terms of social interactions and behaviors?
-
-```{r}
-ggplot(wdata, aes(x = as.numeric(ExcessveSmrtPhn_Use), y = as.numeric(TotAddiction_Score))) +
-  geom_point() +
-  geom_smooth(method = "lm", color = "blue")+theme(axis.text.y=element_text(size=5))
+```{r, warning=FALSE, fig.height = 4, fig.width = 8}
+ggplot(wdata, aes(y = as.numeric(TotAddiction_Score), x = as.numeric(ExcessveSmrtPhn_Use))) +
+  geom_point(aes(color = "maroon"), alpha = 0.4) +
+  geom_smooth(aes(color = "maroon"), method = "lm") +
+  
+  geom_point(aes(x = as.numeric(Rstlss_NoSmrtphn), color = "darkcyan"), alpha = 0.4) +
+  geom_smooth(aes(x = as.numeric(Rstlss_NoSmrtphn), color = "darkcyan"), method = "lm") +
+  
+  geom_point(aes(x = as.numeric(DcreasdSlpTimeQulty_SmrtPhnUse), color = "darkgoldenrod"), alpha = 0.4) +
+  geom_smooth(aes(x = as.numeric(DcreasdSlpTimeQulty_SmrtPhnUse), color = "darkgoldenrod"), method = "lm") +
+  
+  labs(
+    title = "Regression Model of Smartphone Usage and Addiction",
+    x = "Smartphone Usage Categories",
+    y = "Total Addiction Score",
+    color = "Category"
+  ) +
+  scale_color_manual(values = c("maroon", "darkcyan", "darkgoldenrod"),
+                     labels = c("Excessive Smartphone Usage",
+                                "Restlessness without Smartphone",
+                                "Decreased Sleep Time Quality due to Smartphone Use")) +
+  theme(legend.position = "right")
 ```
 
 ```{r}
-wdata <- na.omit(wdata)
+#lm_model_1 <- lm(as.numeric(TotAddiction_Score) ~ as.numeric(ExcessveSmrtPhn_Use), data = wdata, na.action = na.exclude)
+#summary(lm_model_1)
 
-lm_model <- lm(as.numeric(TotAddiction_Score) ~ as.numeric(ExcessveSmrtPhn_Use) , data = wdata, na.action = na.exclude)
-#lm(y,x,data) this is the format for the graph we did
+#lm_model_2 <- lm(as.numeric(TotAddiction_Score) ~ as.numeric(Rstlss_NoSmrtphn), data = wdata, na.action = na.exclude)
+#lm_model_2
 
+#lm_model_3 <- lm(as.numeric(TotAddiction_Score) ~ as.numeric(DcreasdSlpTimeQulty_SmrtPhnUse), data = wdata, na.action = na.exclude)
+#lm_model_3
 
-lm_model
+lm_model_combined <- lm(as.numeric(TotAddiction_Score) ~ as.numeric(ExcessveSmrtPhn_Use) + as.numeric(Rstlss_NoSmrtphn) + as.numeric(DcreasdSlpTimeQulty_SmrtPhnUse), data = wdata, na.action = na.exclude)
+summary(lm_model_combined)
 
-summary(lm_model)
-# why this model and why it relates
-#what is the model 
-# what x is and y
-# after fit the model here r the estimated perametters
-#interperet the perametters
-# look at a hypothsis test for beta 1  
-
-# look at p value for hypothesis testing 
-
-#Intersept and slope 
 ```
 
+#### Why we chose this model
+
+We chose a linear regression model because our data has categorical data represented on a scale from 1 to 4 where 1 is the least extreme, and 4 is the most. We can interpret this as higher levels of $X_i$ leads to higher levels in our Response Variable $Y$.
+
+Given our response $Y$ and our predictors $X_1,…,X_p$ where,
+
+$Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \beta_3 X_3 + \epsilon$ and,
+
+$\epsilon \sim N(O, \sigma^2)$
+
+$\beta_0$ is the intercept. $\beta_1$ is ExcessveSmrtPhn_Use $\beta_2$ is Rstlss_NoSmrtphn $\beta_3$ is DcreasdSlpTimeQulty_SmrtPhnUse
+
+#### What is the model, What x is and y
+
+The model is a linear regression model that predicts the total addiction score (y) based on one or more independent variables (x), such as excessive smartphone usage, restlessness without smartphone, and decreased sleep time quality due to smartphone use.
+
+$X$ is our Independent Variables, where $Y$ is our Dependent Variable, or Response Variable.
+
+#### Interpretation of the Parameters
+
+$\beta_0$, the intercept is 13.8067, meaning when our $\beta_i$'s are 0 we expect the value of our Total addiction score to be 13.8. $\beta_1$, ExcessveSmrtPhn_Use, has a slope coefficients of 3.2675. $\beta_2$, Rstlss_NoSmrtphn, has a slope coefficients of 6.2581. $\beta_3$, DcreasdSlpTimeQulty_SmrtPhnUse, has a slope coefficients of 9.1674.
+
+#### Hypothesis Testing
+
+For each of our variables, we can get the information from hypothesis testing form the summary.
+
+Each of our factors is being tested against the dependent variable of Total addiction score, and we can set up the $H_0$ and $H_A$ as the following: $H^*_A$ = $H^*_0$, means our independent variables have no effect on the dependent variable. $H^*_A$ $\neq$ $H^*_0$, means our independent variables have a statistically significant effect on the dependent variable. For each of our tests we have the following result:
+
+1.  $\beta_1$, ExcessveSmrtPhn_Use has a $p$ value of 6.65e-09, and thus we can reject $H_0$ in favor of $H_A$.
+
+2.  $\beta_2$, Rstlss_NoSmrtphn, has a $p$ value of \< 2e-16, and thus we can reject $H_0$ in favor of $H_A$.
+
+3.  $\beta_3$, DcreasdSlpTimeQulty_SmrtPhnUse, has a $p$ value of \< 2e-16, and thus we can reject $H_0$ in favor of $H_A$.
+
+4.  Finally the $p$ value for our combined linear regression model with each parameter is \< 2.2e-16, and thus we can reject $H_0$ in favor of $H_A$.
+
+\newpage
 
 ```{r}
 ggplot(wdata, aes(x = as.numeric(AgeStrt_useSmrtPhne), y = as.numeric(TotAddiction_Score))) +
@@ -302,3 +346,23 @@ lm_model <- lm(as.numeric(AgeStrt_useSmrtPhne) ~ as.numeric(TotAddiction_Score),
 lm_model
 ```
 
+\newpage
+
+# Refrences
+
+Matar Boumosleh J, Jaalouk D (2017) Depression, anxiety, and smartphone addiction in university students- A cross sectional study. PLOS ONE 12(8): e0182239. https://doi.org/10.1371/journal.pone.0182239
+
+Simó-Sanz C, Ballestar-Tarín MªL, Martínez-Sabater A. Smartphone Addiction Inventory (SPAI): Translation, adaptation and validation of the tool in Spanish adult population. PLoS One. 2018 Oct 17;13(10):e0205389. doi: 10.1371/journal.pone.0205389. PMID: 30332481; PMCID: PMC6192628.
+
+\newpage
+
+```{r, warning=FALSE, fig.height = 4, fig.width = 5}
+ggplot(wdata, aes(y = as.numeric(TotAddiction_Score), x = as.numeric(ExcessveSmrtPhn_Use))) +
+  geom_point(alpha = 0.5) +
+  labs(
+    title = "Regression Model of Smart Phone Usage and Addiction",
+    x = "Excessive Smartphone Usage Levels According to SIAP",
+    y = "Total Addiction Score"
+  ) +
+  geom_smooth(method = "lm", color = "blue")+theme(axis.text.y=element_text(size=5))
+```
