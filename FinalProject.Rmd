@@ -210,6 +210,7 @@ Count = c(31481, 17775, 12605, 18713, 15778, 27910, 218763, 20568, 19420)
 
 
 ```
+
 ```{r, warning=FALSE,message=FALSE}
 # student2017_2020 <- read_csv("https://raw.githubusercontent.com/ryanfernald/MATH167R-Final-Project/main/DATA/smartphone_usage_time_and_health_variable_outcomes.csv")
 
@@ -234,6 +235,7 @@ c20 <- ggplot(na.omit(student_time), aes(x = "",
 
  plot_grid(c17, c20, ncol=2)
 ```
+
 ```{r, fig.height = 8, fig.width = 7}
 df <- read_csv("https://raw.githubusercontent.com/ryanfernald/MATH167R-Final-Project/main/DATA/Student%20usage%20time%20adolescence.csv")
 
@@ -252,36 +254,42 @@ wk2017_pie <- ggplot(Weekday_df, aes(x = "", y = count2017, fill = `Time on smar
   geom_bar(stat = "identity", width = 1, show.legend = FALSE) +
   coord_polar("y") +
   theme_minimal() +
+  theme_void() +
   labs(title = "Weekday 2017")
 
 wk2020_pie <- ggplot(Weekday_df, aes(x = "", y = count2020, fill = `Time on smartphone`)) +
   geom_bar(stat = "identity", width = 1, show.legend = FALSE) +
   coord_polar("y") +
   theme_minimal() +
+  theme_void() +
   labs(title = "Weekday 2020")
 
 we2017_pie <- ggplot(Weekend_df, aes(x = "", y = count2017, fill = `Time on smartphone`)) +
   geom_bar(stat = "identity", width = 1, show.legend = FALSE) +
   coord_polar("y") +
   theme_minimal() +
+  theme_void() +
   labs(title = "Weekend 2017")
 
 we2020_pie <- ggplot(Weekend_df, aes(x = "", y = count2020, fill = `Time on smartphone`)) +
   geom_bar(stat = "identity", width = 1, show.legend = FALSE) +
   coord_polar("y") +
   theme_minimal() +
+  theme_void() +
   labs(title = "Weekend 2020")
 
 da2017_pie <- ggplot(Daily_avg, aes(x = "", y = count2017, fill = `Time on smartphone`)) +
   geom_bar(stat = "identity", width = 1, show.legend = FALSE) +
   coord_polar("y") +
-  theme_minimal() + 
+  theme_minimal() +
+  theme_void() +
   labs(title = "Daily Average 2017")
 
 da2020_pie <- ggplot(Daily_avg, aes(x = "", y = count2020, fill = `Time on smartphone`)) +
   geom_bar(stat = "identity", width = 1, show.legend = FALSE) +
   coord_polar("y") +
   theme_minimal() + 
+  theme_void() +
   labs(title = "Daily Average 2020")
 
 
@@ -433,12 +441,17 @@ Each of our factors is being tested against the dependent variable of Total addi
 
 \newpage
 
-```{r}
+```{r, warning=FALSE, fig.height = 4, fig.width = 6}
 ggplot(wdata, aes(x = as.numeric(AgeStrt_useSmrtPhne),
                   y = as.numeric(TotAddiction_Score))) +
   geom_point(alpha = 0.5) +
-  geom_smooth(method = "lm", color = "blue")+
-  theme(axis.text.y=element_text(size=5))
+  geom_smooth(method = "lm", color = "darkcyan")+
+  labs(
+    title = "Regression Model of Age Individuals Started Using Smartphones and Total Addiction Score",
+    x = "Age Individuals Started Using Smartphones",
+    y = "Total Addiction Score"
+  ) +
+  theme(plot.title = element_text(size=9.5))
 ```
 
 ```{r}
@@ -468,3 +481,33 @@ ggplot(wdata, aes(y = as.numeric(TotAddiction_Score), x = as.numeric(ExcessveSmr
   ) +
   geom_smooth(method = "lm", color = "blue")+theme(axis.text.y=element_text(size=5))
 ```
+
+```{r, warning=FALSE, fig.height = 4, fig.width = 8}
+ggplot(wdata, aes(y = as.numeric(Withdrawal), 
+                  x = as.numeric(ExcessveSmrtPhn_Use))) +
+  geom_point(aes(color = "cornflowerblue"), alpha = 0.4) +
+  geom_smooth(aes(color = "cornflowerblue"), method = "lm") +
+  
+  geom_point(aes(x = as.numeric(Rstlss_NoSmrtphn),
+                 color = "coral1"), alpha = 0.4) +
+  geom_smooth(aes(x = as.numeric(Rstlss_NoSmrtphn),
+                  color = "coral1"), method = "lm") +
+  
+  geom_point(aes(x = as.numeric(DcreasdSlpTimeQulty_SmrtPhnUse),
+                 color = "darkseagreen2"), alpha = 0.4) +
+  geom_smooth(aes(x = as.numeric(DcreasdSlpTimeQulty_SmrtPhnUse),
+                  color = "darkseagreen2"), method = "lm") +
+  
+  labs(
+    title = "Regression Model of Smartphone Usage and Withdrawl Score",
+    x = "Smartphone Usage Categories",
+    y = "Withdrawal Score",
+    color = "Category"
+  ) +
+  scale_color_manual(values = c("cornflowerblue", "coral1", "darkseagreen2"),
+                     labels = c("Excessive Smartphone Usage",
+                                "Restlessness without Smartphone",
+                                "Decreased Sleep Time Quality due to Smartphone Use")) +
+  theme(legend.position = "right")
+```
+
