@@ -13,6 +13,7 @@ library(tidyverse)
 library(ggplot2)
 library(ggthemes)
 library(patchwork)
+library(cowplot)
 ```
 
 ```{r, warning=FALSE}
@@ -26,6 +27,7 @@ head(data)
 
 ```{r, warning=FALSE}
 filtered_data <- data[, c(1:2, seq(4, ncol(data), by = 2))]
+filtered_data <- data[-1, ]
 head(filtered_data)
 ```
 
@@ -209,6 +211,8 @@ Count = c(31481, 17775, 12605, 18713, 15778, 27910, 218763, 20568, 19420)
 
 ```
 ```{r, warning=FALSE,message=FALSE}
+# student2017_2020 <- read_csv("https://raw.githubusercontent.com/ryanfernald/MATH167R-Final-Project/main/DATA/smartphone_usage_time_and_health_variable_outcomes.csv")
+
 c17 <- ggplot(na.omit(student_time), aes(x = "",
                                   y = as.numeric(`2017 Count (n = 61861)`),
                                    fill =`Time on smartphone`))+
@@ -229,6 +233,63 @@ c20 <- ggplot(na.omit(student_time), aes(x = "",
                   theme(legend.position = "right")# Add labels directly on top of bars with dodge position
 
  plot_grid(c17, c20, ncol=2)
+```
+```{r, fig.height = 8, fig.width = 7}
+df <- read_csv("https://raw.githubusercontent.com/ryanfernald/MATH167R-Final-Project/main/DATA/Student%20usage%20time%20adolescence.csv")
+
+df <- df[,-c(4,6)]
+df <- df[1:(nrow(df)-1), ]
+names(df)[3] <- "count2017"
+names(df)[4] <- "count2020"
+
+Weekday_df <- head(df, 3)
+
+Weekend_df <- df[4:6, ]
+
+Daily_avg <- df[7:9, ]
+
+wk2017_pie <- ggplot(Weekday_df, aes(x = "", y = count2017, fill = `Time on smartphone`)) +
+  geom_bar(stat = "identity", width = 1, show.legend = FALSE) +
+  coord_polar("y") +
+  theme_minimal() +
+  labs(title = "Weekday 2017")
+
+wk2020_pie <- ggplot(Weekday_df, aes(x = "", y = count2020, fill = `Time on smartphone`)) +
+  geom_bar(stat = "identity", width = 1, show.legend = FALSE) +
+  coord_polar("y") +
+  theme_minimal() +
+  labs(title = "Weekday 2020")
+
+we2017_pie <- ggplot(Weekend_df, aes(x = "", y = count2017, fill = `Time on smartphone`)) +
+  geom_bar(stat = "identity", width = 1, show.legend = FALSE) +
+  coord_polar("y") +
+  theme_minimal() +
+  labs(title = "Weekend 2017")
+
+we2020_pie <- ggplot(Weekend_df, aes(x = "", y = count2020, fill = `Time on smartphone`)) +
+  geom_bar(stat = "identity", width = 1, show.legend = FALSE) +
+  coord_polar("y") +
+  theme_minimal() +
+  labs(title = "Weekend 2020")
+
+da2017_pie <- ggplot(Daily_avg, aes(x = "", y = count2017, fill = `Time on smartphone`)) +
+  geom_bar(stat = "identity", width = 1, show.legend = FALSE) +
+  coord_polar("y") +
+  theme_minimal() + 
+  labs(title = "Daily Average 2017")
+
+da2020_pie <- ggplot(Daily_avg, aes(x = "", y = count2020, fill = `Time on smartphone`)) +
+  geom_bar(stat = "identity", width = 1, show.legend = FALSE) +
+  coord_polar("y") +
+  theme_minimal() + 
+  labs(title = "Daily Average 2020")
+
+
+
+plot_grid(wk2017_pie, wk2020_pie, we2017_pie, we2020_pie,da2017_pie, da2020_pie, ncol=2)
+
+
+
 ```
 
 
